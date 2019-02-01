@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace RoverMars
 {
-    class Commands
+    public abstract class Commands
     {
-        private void Advance()
+        public void Advance()
         {
             
         }
 
-        private void TurnLeft()
+        public void TurnLeft()
         {
             
         }
 
-        private void TurnRight()
+        public void TurnRight()
         {
            
         }
 
-        public Commands(int x, int y, string o)
+        public Commands()
         {
            
         }

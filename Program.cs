@@ -59,26 +59,29 @@ namespace RoverMars
                 }
             }
 
-            
-            Rover r = new Rover(Convert.ToInt32(_A_dataRover[0]), Convert.ToInt32(_A_dataRover[1]), _A_dataRover[2].ToUpper().ToString());
             Square s = new Square(Convert.ToInt32(_A_dataSquare[0]), Convert.ToInt32(_A_dataSquare[1]));
-            r.s = s;
+            Rover r = new Rover(Convert.ToInt32(_A_dataRover[0]), Convert.ToInt32(_A_dataRover[1]), _A_dataRover[2].ToUpper().ToString(), s);
+            
             while (EnterCommand(r));
-
 
         }
 
         private static bool EnterCommand(Rover r)
         {
+            bool res = false;
             Console.Write("Enter command string: [X - End]: ");
             string command = Console.ReadLine();
             if (command.ToUpper() == "X") return false;
-            if (!command.ToUpper().Contains("A") && !command.ToUpper().Contains("L") && !command.ToUpper().Contains("R")) return false;
-
-            bool res = r.Move(command.ToUpper());
-            if (!res)
+            if (!command.ToUpper().Contains("A") && !command.ToUpper().Contains("L") && !command.ToUpper().Contains("R")) res = true;
+            
+            if (res)
             {
-                Console.WriteLine("Command not valid out of boundaries"); 
+                Console.WriteLine("Command not valid"); 
+            }
+            else
+            {
+                res = r.Move(command.ToUpper());
+                if (!res) Console.WriteLine("Out of boundaries");
             }
 
             Console.WriteLine(r.ToString());
